@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport"
     content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-  <title>前航 - 前端导航网站</title>
+  <title>前航</title>
   <style type="text/css">
     .icon {
       width: 1em;
@@ -21,7 +21,7 @@
 <body>
   <header class="globalHeader">
     <form class="searchFrom" method="get" action="https://www.baidu.com/s">
-      <input name="wd" type="text">
+      <input class="wd_input" name="wd" type="text">
       <button type="submit">搜索</button>
     </form>
   </header>
@@ -38,8 +38,33 @@
         </div>
       </li>
     </ul>
+
   </main>
-  <script src="//at.alicdn.com/t/font_2030430_po8p0ipncs.js"></script>
+  <!-- 修改内容 -->
+  <divi class="dialog-mask">
+    <div class="dialog-modify">
+      <div class="dialog-title">修改信息</div>
+      <div class="container">
+        <div class="box">
+          <span class="box-name">名称</span>
+          <input class="modify_name_input" autocomplete="off" type="text">
+        </div>
+        <div class="box">
+          <span class="box-name">网址</span>
+          <input class="modify_url_input" autocomplete="off" type="text">
+        </div>
+      </div>
+      <div class="btn-area">
+        <button class="btn remove">移除</button>
+        <div class="right-container">
+          <button class="btn cancel">取消</button>
+          <button class="btn complete">完成</button>
+        </div>
+      </div>
+    </div>
+  </divi>
+
+  <script src="//at.alicdn.com/t/font_2030430_rvz7bmsg40r.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="main.js"></script>
 </body>

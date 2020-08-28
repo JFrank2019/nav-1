@@ -120,16 +120,26 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"epB2":[function(require,module,exports) {
 var $siteList = $('.siteList');
 var $lastLi = $siteList.find('li.last');
-var history = JSON.parse(localStorage.getItem('history'));
+var $dialogMask = $('.dialog-mask');
+var $modifyNameInput = $('.modify_name_input');
+var $modifyUrlInput = $('.modify_url_input');
+var history = JSON.parse(localStorage.getItem('history')); // 判断输入框是否获取了焦点
+
+var isInputFocus = false;
+var modifyObj = null;
+var hashMapActiveIndex;
 var hashMap = history || [{
   logo: 'V',
-  url: 'https://cn.vuejs.org/'
+  url: 'https://cn.vuejs.org/',
+  modified: false
 }, {
   logo: 'R',
-  url: 'https://react.docschina.org/'
+  url: 'https://react.docschina.org/',
+  modified: false
 }, {
   logo: 'J',
-  url: 'https://jquery.cuishifeng.cn/'
+  url: 'https://jquery.cuishifeng.cn/',
+  modified: false
 }];
 
 var simplyUrl = function simplyUrl(url) {
@@ -139,21 +149,54 @@ var simplyUrl = function simplyUrl(url) {
 var render = function render() {
   $siteList.find('li:not(.last)').remove();
   hashMap.forEach(function (node, index) {
-    var $li = $("\n      <li>\n        <div class=\"site\">\n          <div class=\"logo\">".concat(node.logo, "</div>\n          <div class=\"link\">").concat(simplyUrl(node.url), "</div>\n          <div class=\"close\">\n            <svg class=\"icon\" aria-hidden=\"true\">\n              <use xlink:href=\"#icon-close\"></use>\n            </svg>\n          </div>\n        </div>\n      </li>\n    ")).insertBefore($lastLi);
+    node.name = node.modified ? node.name : simplyUrl(node.url);
+    var $li;
+
+    if (node.modified) {
+      $li = $("\n        <li>\n          <div class=\"site\">\n            <div class=\"logo\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(node.name, "</div>\n            <div class=\"point\">\n              <svg class=\"icon\" aria-hidden=\"true\">\n                <use xlink:href=\"#icon-point\"></use>\n              </svg>\n            </div>\n          </div>\n        </li>\n      ")).insertBefore($lastLi);
+    } else {
+      $li = $("\n        <li>\n          <div class=\"site\">\n            <div class=\"logo\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplyUrl(node.url), "</div>\n            <div class=\"point\">\n              <svg class=\"icon\" aria-hidden=\"true\">\n                <use xlink:href=\"#icon-point\"></use>\n              </svg>\n            </div>\n          </div>\n        </li>\n      ")).insertBefore($lastLi);
+    }
+
     $li.on('click', function () {
       window.open(node.url);
     });
-    $li.on('click', '.close', function (e) {
-      e.stopPropagation();
-      hashMap.splice(index, 1);
-      render();
+    $li.on('click', '.point', function (e) {
+      e.stopPropagation(); // 保存索引
+
+      hashMapActiveIndex = index;
+      $dialogMask.show();
+      modifyObj = {
+        logo: hashMap[index].logo,
+        url: hashMap[index].url,
+        name: hashMap[index].name,
+        modified: false
+      };
+      $modifyNameInput.val(hashMap[index].name);
+      $modifyUrlInput.val(hashMap[index].url);
     });
   });
+}; // 重置中间变量
+
+
+var resetModifyObj = function resetModifyObj() {
+  modifyObj = null;
+  hashMapActiveIndex = undefined;
 };
 
-render();
+render(); // 存储输入框获取焦点的状态
+
+Array.from(document.getElementsByTagName('input')).forEach(function (input) {
+  $(input).focus(function () {
+    return isInputFocus = true;
+  });
+  $(input).blur(function () {
+    return isInputFocus = false;
+  });
+});
 $('.addButton').on('click', function () {
   var url = window.prompt('请问你要输入的网址是什么');
+  if (!url) return;
 
   if (url.indexOf('http') !== 0) {
     url = 'https://' + url;
@@ -166,19 +209,49 @@ $('.addButton').on('click', function () {
   });
   render();
 });
+$modifyNameInput.on('change', function (e) {
+  modifyObj.name = $modifyNameInput.val();
+  modifyObj.modified = true;
+});
+$modifyUrlInput.on('change', function (e) {
+  modifyObj.logo = simplyUrl($modifyUrlInput.val())[0];
+  var url = $modifyUrlInput.val();
 
-window.onbeforeunload = function () {
-  localStorage.setItem('history', JSON.stringify(hashMap));
-};
+  if (url.indexOf('http') !== 0) {
+    url = 'https://' + url;
+  }
 
+  modifyObj.url = url;
+  modifyObj.modified = true;
+});
+$('.cancel').on('click', function () {
+  $dialogMask.hide('fast');
+  resetModifyObj();
+});
+$('.remove').on('click', function () {
+  hashMap.splice(hashMapActiveIndex, 1);
+  $dialogMask.hide('fast');
+  resetModifyObj();
+  render();
+});
+$('.complete').on('click', function () {
+  hashMap.splice(hashMapActiveIndex, 1, modifyObj);
+  $dialogMask.hide('fast');
+  resetModifyObj();
+  render();
+});
 $(document).on('keypress', function (e) {
   var key = e.key;
 
   for (var i = 0; i < hashMap.length; i++) {
-    if (hashMap[i].logo.toLowerCase() === key) {
+    if (hashMap[i].logo.toLowerCase() === key && !isInputFocus) {
       window.open(hashMap[i].url);
     }
   }
 });
+
+window.onbeforeunload = function () {
+  localStorage.setItem('history', JSON.stringify(hashMap));
+};
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.02c17544.js.map
+//# sourceMappingURL=main.bd46cc31.js.map

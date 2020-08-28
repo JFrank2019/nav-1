@@ -25,7 +25,105 @@ img {
 
 /* style */
 body {
+  position: relative;
   background: #eeeeee;
+}
+
+.dialog-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.6);
+  user-select: none;
+  display: none;
+
+  .dialog-modify {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 3px 0px, rgba(60, 64, 67, 0.15) 0px 4px 8px 3px;
+    margin: auto;
+    min-width: 320px;
+    padding: 16px;
+    z-index: 200;
+    width: fit-content;
+    .dialog-title {
+      font-size: 15px;
+      line-height: 24px;
+      margin-bottom: 16px;
+    }
+    .container {
+      .box {
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        .box-name {
+          margin-bottom: 5px;
+          display: block;
+          font-size: 12px;
+          color: rgb(95, 99, 104);
+        }
+        input {
+          background: rgb(241, 243, 244);
+          border: none;
+          border-radius: 4px;
+          caret-color: rgb(var(--GB600-rgb));
+          color: rgb(var(--GG900-rgb));
+          font-size: 13px;
+          line-height: 1.6;
+          min-height: 32px;
+          outline: none;
+          padding-inline-end: 8px;
+          padding-inline-start: 8px;
+          width: 100%;
+        }
+      }
+    }
+    .btn-area {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      .btn {
+        background: #fff;
+        border: 1px solid rgb(218, 220, 224);
+        border-radius: 4px;
+        color: rgb(26, 115, 232);
+        padding: 0 16px;
+        height: 32px;
+        font-size: 12px;
+        cursor: pointer;
+        outline: none;
+        &.remove {
+          &:hover {
+            background: rgba(66, 133, 244, 0.04);
+          }
+        }
+        &.cancel {
+          margin-right: 8px;
+          &:hover {
+            background: rgba(66, 133, 244, 0.04);
+          }
+        }
+        &.complete {
+          background: rgb(26, 115, 232);
+          border: 1px solid rgb(26, 115, 232);
+          color: #fff;
+          &:hover {
+            background-color: rgb(41, 123, 231);
+            box-shadow: rgba(66, 133, 244, 0.3) 0px 1px 2px 0px, rgba(66, 133, 244, 0.15) 0px 1px 3px 1px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* 手机端 */
@@ -99,17 +197,22 @@ body {
             align-items: center;
             font-size: 64px;
             text-transform: uppercase;
+            user-select: none;
           }
           .link {
             margin-top: 4px;
             font-size: 14px;
           }
-          .close {
+          .point {
             position: absolute;
             width: 20px;
             height: 20px;
-            right: 0;
-            top: 0;
+            right: 1px;
+            top: 4px;
+            .icon {
+              width: 20px;
+              height: 20px;
+            }
           }
         }
       }
@@ -212,10 +315,6 @@ body {
           border-radius: 4px;
           background: #fff;
           cursor: pointer;
-
-          &:hover > .close {
-            display: block;
-          }
           .logo {
             width: 64px;
             height: 64px;
@@ -224,19 +323,22 @@ body {
             align-items: center;
             font-size: 64px;
             text-transform: uppercase;
+            user-select: none;
           }
           .link {
             margin-top: 4px;
             font-size: 14px;
           }
-          .close {
+          .point {
             position: absolute;
             width: 20px;
             height: 20px;
-            right: 0;
-            top: 0;
-            display: none;
-            cursor: default;
+            right: 1px;
+            top: 4px;
+            .icon {
+              width: 20px;
+              height: 20px;
+            }
           }
         }
       }

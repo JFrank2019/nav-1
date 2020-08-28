@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "serve": "rm -rf dist && parcel src/index.html",
+    "build": "rm -rf dist && rm -rf .cache && parcel build src/index.html --no-minify --public-url ./"
+  },
+  "name": "nav-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/JFrank2019/nav-1.git",
+  "author": "JFrank2019 <jfrank2019@163.com>",
+  "license": "MIT"
+}

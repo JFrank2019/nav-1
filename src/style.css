@@ -24,7 +24,99 @@ img {
 }
 /* style */
 body {
+  position: relative;
   background: #eeeeee;
+}
+.dialog-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.6);
+  user-select: none;
+  display: none;
+}
+.dialog-mask .dialog-modify {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 3px 0px, rgba(60, 64, 67, 0.15) 0px 4px 8px 3px;
+  margin: auto;
+  min-width: 320px;
+  padding: 16px;
+  z-index: 200;
+  width: fit-content;
+}
+.dialog-mask .dialog-modify .dialog-title {
+  font-size: 15px;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+.dialog-mask .dialog-modify .container .box {
+  margin-bottom: 10px;
+}
+.dialog-mask .dialog-modify .container .box:last-child {
+  margin-bottom: 0;
+}
+.dialog-mask .dialog-modify .container .box .box-name {
+  margin-bottom: 5px;
+  display: block;
+  font-size: 12px;
+  color: #5f6368;
+}
+.dialog-mask .dialog-modify .container .box input {
+  background: #f1f3f4;
+  border: none;
+  border-radius: 4px;
+  caret-color: rgb(var(--GB600-rgb));
+  color: rgb(var(--GG900-rgb));
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 32px;
+  outline: none;
+  padding-inline-end: 8px;
+  padding-inline-start: 8px;
+  width: 100%;
+}
+.dialog-mask .dialog-modify .btn-area {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.dialog-mask .dialog-modify .btn-area .btn {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  color: #1a73e8;
+  padding: 0 16px;
+  height: 32px;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+}
+.dialog-mask .dialog-modify .btn-area .btn.remove:hover {
+  background: rgba(66, 133, 244, 0.04);
+}
+.dialog-mask .dialog-modify .btn-area .btn.cancel {
+  margin-right: 8px;
+}
+.dialog-mask .dialog-modify .btn-area .btn.cancel:hover {
+  background: rgba(66, 133, 244, 0.04);
+}
+.dialog-mask .dialog-modify .btn-area .btn.complete {
+  background: #1a73e8;
+  border: 1px solid #1a73e8;
+  color: #fff;
+}
+.dialog-mask .dialog-modify .btn-area .btn.complete:hover {
+  background-color: #297be7;
+  box-shadow: rgba(66, 133, 244, 0.3) 0px 1px 2px 0px, rgba(66, 133, 244, 0.15) 0px 1px 3px 1px;
 }
 /* 手机端 */
 @media (max-width: 500px) {
@@ -100,17 +192,22 @@ body {
     align-items: center;
     font-size: 64px;
     text-transform: uppercase;
+    user-select: none;
   }
   .globalMain .siteList li .site .link {
     margin-top: 4px;
     font-size: 14px;
   }
-  .globalMain .siteList li .site .close {
+  .globalMain .siteList li .site .point {
     position: absolute;
     width: 20px;
     height: 20px;
-    right: 0;
-    top: 0;
+    right: 1px;
+    top: 4px;
+  }
+  .globalMain .siteList li .site .point .icon {
+    width: 20px;
+    height: 20px;
   }
   .globalMain .siteList .last .addButton {
     width: 160px;
@@ -209,9 +306,6 @@ body {
     background: #fff;
     cursor: pointer;
   }
-  .globalMain .siteList li .site:hover > .close {
-    display: block;
-  }
   .globalMain .siteList li .site .logo {
     width: 64px;
     height: 64px;
@@ -220,19 +314,22 @@ body {
     align-items: center;
     font-size: 64px;
     text-transform: uppercase;
+    user-select: none;
   }
   .globalMain .siteList li .site .link {
     margin-top: 4px;
     font-size: 14px;
   }
-  .globalMain .siteList li .site .close {
+  .globalMain .siteList li .site .point {
     position: absolute;
     width: 20px;
     height: 20px;
-    right: 0;
-    top: 0;
-    display: none;
-    cursor: default;
+    right: 1px;
+    top: 4px;
+  }
+  .globalMain .siteList li .site .point .icon {
+    width: 20px;
+    height: 20px;
   }
   .globalMain .siteList .last .addButton {
     width: 160px;
