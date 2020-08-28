@@ -1,0 +1,270 @@
+/* css reset */
+* {
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+ul,
+ol {
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* style */
+body {
+  background: #eeeeee;
+}
+
+/* 手机端 */
+@media (max-width: 500px) {
+  .globalHeader {
+    margin: 20px;
+    .searchFrom {
+      display: flex;
+      width: 100%;
+      input {
+        flex: 1;
+        height: 40px;
+        border: none;
+        outline: none;
+        padding: 0 10px;
+        border: 1px solid #1b92e9;
+        border-radius: 4px 0px 0px 4px;
+      }
+      button {
+        width: 80px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #1b92e9;
+        color: #fff;
+        border: none;
+        outline: none;
+        border-radius: 0px 4px 4px 0px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .globalMain {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    .siteList {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 20px;
+      justify-content: space-between;
+      max-height: calc(100vh - 100px);
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 0 !important;
+      }
+      li {
+        margin-right: 0;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .site {
+          position: relative;
+          width: 160px;
+          padding: 20px 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          background: #fff;
+          .logo {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 64px;
+            text-transform: uppercase;
+          }
+          .link {
+            margin-top: 4px;
+            font-size: 14px;
+          }
+          .close {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 0;
+            top: 0;
+          }
+        }
+      }
+      .last {
+        .addButton {
+          width: 160px;
+          padding: 20px 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: #fff;
+          border-radius: 4px;
+          border: 1px solid #ddd;
+          .iconWrapper {
+            width: 64px;
+            height: 64px;
+            .icon {
+              width: 64px;
+              height: 64px;
+            }
+          }
+          .text {
+            margin-top: 4px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* PC端 */
+@media (min-width: 500px) {
+  .globalHeader {
+    margin: 60px 0;
+    .searchFrom {
+      display: flex;
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      input {
+        flex: 1;
+        height: 40px;
+        border: none;
+        outline: none;
+        padding: 0 10px;
+        border: 1px solid #1b92e9;
+        border-radius: 4px 0px 0px 4px;
+      }
+      button {
+        width: 80px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #1b92e9;
+        color: #fff;
+        border: none;
+        outline: none;
+        border-radius: 0px 4px 4px 0px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .globalMain {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    .siteList {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -20px;
+      max-height: 430px;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 0 !important;
+      }
+      li {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+        &:hover {
+          box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+          transition: box-shadow 0.3s ease-out;
+        }
+        .site {
+          position: relative;
+          width: 160px;
+          padding: 20px 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          background: #fff;
+          cursor: pointer;
+
+          &:hover > .close {
+            display: block;
+          }
+          .logo {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 64px;
+            text-transform: uppercase;
+          }
+          .link {
+            margin-top: 4px;
+            font-size: 14px;
+          }
+          .close {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 0;
+            top: 0;
+            display: none;
+            cursor: default;
+          }
+        }
+      }
+      .last {
+        .addButton {
+          width: 160px;
+          padding: 20px 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: #fff;
+          border-radius: 4px;
+          border: 1px solid #ddd;
+          .iconWrapper {
+            width: 64px;
+            height: 64px;
+            .icon {
+              width: 64px;
+              height: 64px;
+            }
+          }
+          .text {
+            margin-top: 4px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
